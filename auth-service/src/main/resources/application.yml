@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: auth-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/db}
+    username: ${POSTGRES_USER:test}
+    password: ${POSTGRES_PASSWORD:password}
+
+services:
+    data-api: ${SERVICES_DATA-API:http://localhost:8081}
+jwt:
+      expiration-time: 1800000
+      secret: ${JWT_SECRET:8fae5fbddd73117f34bb0cf21cab84648a3bbe068596c0d54f22f12fe698187e}
+internal:
+    token: ${INTERNAL_TOKEN:tokenExamplse123}
+server:
+  port: 8080

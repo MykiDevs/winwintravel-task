@@ -1,0 +1,60 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-db}
+      - POSTGRES_USER=${POSTGRES_USER:-test}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+    healthcheck:
+      disable: false
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-test} -d ${POSTGRES_DB:-db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    networks:
+      - microservices-net
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  auth-service:
+    build:
+      context: ./auth-service/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRES_URL=${POSTGRES_URL:-jdbc:postgresql://postgres:5432/db}
+      - POSTGRES_USER=${POSTGRES_USER:-test}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - INTERNAL_TOKEN=${INTERNAL_TOKEN:-123321}
+      - JWT_SECRET={$JWT_SECRET:-8fae5fbddd73117f34bb0cf21cab84648a3bbe068596c0d54f22f12fe698187e}
+      - SERVICES_DATA-API=${SERVICES_DATA-API:-http://data-api:8081/}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - microservices-net
+    restart: on-failure
+
+  data-api:
+    build:
+      context: ./data-api/
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - INTERNAL_TOKEN=${INTERNAL_TOKEN:-123321}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - microservices-net
+    restart: on-failure
+
+networks:
+  microservices-net:
+    driver: bridge
+volumes:
+  postgres_data:
