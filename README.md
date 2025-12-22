@@ -25,10 +25,13 @@ The application is configured via environment variables. You can modify them in 
 
 | Variable | Default Value | Description |
 | :--- | :--- | :--- |
+| `POSTGRES_DB` | `db` | Database name |
+| `POSTGRES_URL` | `jdbc:postgresql://postgres:5432/db` | Database url |
 | `POSTGRES_USER` | `test` | Database username |
 | `POSTGRES_PASSWORD` | `password` | Database password |
 | `INTERNAL_TOKEN` | `123321` | Shared secret between Service A and B |
 | `JWT_SECRET` | `8fae5f...` | Secret key for signing JWT tokens |
+| `SERVICES_DATA-API` | `http://data-api:8081/` | In docker data-api url |
 
 ## Getting Started
 
