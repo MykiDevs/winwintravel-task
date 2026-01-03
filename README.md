@@ -72,14 +72,3 @@ curl -X POST http://localhost:8080/api/process \
 -H "Content-Type: application/json" \
 -d '{"text":"hello world"}'
 ```
-
-**Expected Result:**
-1. Service A validates your JWT.
-2. Service A sends a request to Service B with `X-Internal-Token`.
-3. Service B returns uppercase text.
-4. Service A saves the log to PostgreSQL and returns the result to you.
-
-## Database Schema
-The system automatically manages two tables:
-- `users`: Stores credentials (passwords are hashed via BCrypt).
-- `processing_log`: Stores interaction history (User ID, input, output, and timestamp).
