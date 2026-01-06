@@ -59,4 +59,4 @@ curl -X POST http://localhost:8080/api/process \
 ```
 
 # License
-[MIT](https://github.com/MykiDevs/winwintravel-task/blob/main/README.md)
+[MIT](https://github.com/MykiDevs/winwintravel-task/blob/main/LICENSE)
