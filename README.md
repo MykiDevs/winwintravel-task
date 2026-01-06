@@ -1,15 +1,8 @@
 
-# Microservices Communication Task: Auth-Service & Data-API
-
+# Microservice Communication Task
 This project implements a secure microservices architecture consisting of two Spring Boot applications and a PostgreSQL database, orchestrated via Docker Compose.
 
-## Architecture Overview
-
-1.  **Auth-Service (Service A):** Handles user registration, authentication (JWT), and processing logs. It acts as a gateway that communicates with the Data-API.
-2.  **Data-API (Service B):** A protected service that performs text transformation. It only accepts requests verified by a shared `X-Internal-Token`.
-3.  **PostgreSQL:** Stores persistent data for users and processing history.
-
-## Technologies
+## Tech Stack
 - Java 17 / Spring Boot 4.0.1
 - Spring Security & JWT
 - Spring Data JPA
@@ -17,8 +10,8 @@ This project implements a secure microservices architecture consisting of two Sp
 - PostgreSQL 17
 
 ## Prerequisites
-- Docker (Desktop or Engine)
-- Maven (optional, for manual builds)
+- Docker
+- Maven
 
 ## Environment Variables
 The application is configured via environment variables. You can modify them in the `docker-compose.yml` or create a `.env` file:
@@ -34,20 +27,12 @@ The application is configured via environment variables. You can modify them in 
 | `SERVICES_DATA-API` | `http://data-api:8081/` | In docker data-api url |
 
 ## Getting Started
-
-### 1. Build and Run
+### 1. Build and Run via Docker
 Execute the following command in the root directory to build and start all services:
 
 ```bash
 docker compose up -d --build
 ```
-
-The system uses a **Healthcheck** mechanism. The services will wait for the PostgreSQL container to be fully initialized before starting.
-
-### 2. Service Access
-- **Auth-Service:** `http://localhost:8080`
-- **Data-API:** `http://localhost:8081`
-
 ## API Usage Flow
 
 ### Step 1: Register a new user
