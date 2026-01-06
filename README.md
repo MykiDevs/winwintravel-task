@@ -33,7 +33,7 @@ Execute the following command in the root directory to build and start all servi
 ```bash
 docker compose up -d --build
 ```
-## API Usage Flow
+## API Usage Examples
 
 ### Step 1: Register a new user
 ```bash
