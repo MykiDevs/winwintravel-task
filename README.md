@@ -57,3 +57,6 @@ curl -X POST http://localhost:8080/api/process \
 -H "Content-Type: application/json" \
 -d '{"text":"hello world"}'
 ```
+
+# License
+[MIT](https://github.com/MykiDevs/winwintravel-task/blob/main/README.md)
